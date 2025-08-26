@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Validación - Gaming Style</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="style-validacion.css">
+</head>
+<body>
+    <!-- Consent Modal -->
+    <div class="modal fade" id="consentModal" tabindex="-1" aria-labelledby="consentModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content consent-modal">
+                <div class="modal-header border-0 p-0">
+                    <img src="imagenes/img1.jpg" alt="Encabezado imagen representativa para el formulario de validación" class="img-fluid w-100 consent-header-img" onerror="this.style.display='none';">
+                </div>
+                <div class="modal-body text-center p-4">
+                    <h2 class="consent-title mb-4">Validación de Datos</h2>
+                    <div class="consent-text">
+                        <p class="mb-3">PARA CONTINUAR, ES IMPORTANTE CONOCER SI VOLUNTARIAMENTE ACEPTAS SUMINISTRAR TUS DATOS PERSONALES</p>
+                        <p class="mb-3"><strong>ARTÍCULO 5 LEY 1581 DE 2012</strong></p>
+                        <p class="mb-4"><strong>ACEPTO SUMINISTRAR</strong></p>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center border-0 pb-4">
+                    <button type="button" id="btnAceptar" class="btn btn-accept me-3">
+                        <span class="btn-text">Aceptar</span>
+                    </button>
+                    <button type="button" id="btnNoAceptar" class="btn btn-reject">
+                        <span class="btn-text">No Acepto</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Form Container -->
+    <div id="formContainer" class="form-container" style="display: none;">
+        <!-- Header Banner -->
+        <div class="banner-container">
+            <img src="imagenes/img2.jpg" alt="Banner representativo del formulario de validación con diseño gaming" class="banner-img" onerror="this.style.display='none';">
+            <div class="banner-overlay">
+                <h1 class="banner-title">Formulario de Validación</h1>
+            </div>
+        </div>
+
+        <!-- Form Section -->
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-xl-6">
+                    <form id="dataForm" class="data-form">
+                        <div class="form-section">
+                            <h3 class="section-title">Información Personal</h3>
+                            
+                            <!-- Nombre Completo -->
+                            <div class="form-group">
+                                <label for="nombreCompleto" class="form-label">Nombre Completo *</label>
+                                <input type="text" id="nombreCompleto" name="nombreCompleto" class="form-control" required placeholder="Ingrese su nombre completo">
+                                <div class="invalid-feedback"></div>
+                            </div>
+
+                            <!-- Tipo de Documento -->
+                            <div class="form-group">
+                                <label for="tipoDocumento" class="form-label">Tipo de Documento *</label>
+                                <select id="tipoDocumento" name="tipoDocumento" class="form-select" required>
+                                    <option value="">Seleccione tipo de documento</option>
+                                    <option value="CEDULA DE CIUDADANIA">CÉDULA DE CIUDADANÍA</option>
+                                    <option value="CEDULA DE EXTRANJERIA">CÉDULA DE EXTRANJERÍA</option>
+                                </select>
+                                <div class="invalid-feedback"></div>
+                            </div>
+
+                            <!-- Número de Documento -->
+                            <div class="form-group">
+                                <label for="numeroDocumento" class="form-label">Número de Documento *</label>
+                                <input type="text" id="numeroDocumento" name="numeroDocumento" class="form-control" required placeholder="Ingrese su número de documento">
+                                <div class="invalid-feedback"></div>
+                            </div>
+
+                            <!-- Dirección -->
+                            <div class="form-group">
+                                <label for="direccion" class="form-label">Dirección *</label>
+                                <input type="text" id="direccion" name="direccion" class="form-control" required placeholder="Ingrese su dirección completa">
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3 class="section-title">Información de Vivienda</h3>
+                            
+                            <!-- Tipo de Vivienda -->
+                            <div class="form-group">
+                                <label for="tipoVivienda" class="form-label">Tipo de Vivienda *</label>
+                                <select id="tipoVivienda" name="tipoVivienda" class="form-select" required>
+                                    <option value="">Seleccione tipo de vivienda</option>
+                                    <option value="casa">Casa</option>
+                                    <option value="conjunto">Conjunto</option>
+                                </select>
+                                <div class="invalid-feedback"></div>
+                            </div>
+
+                            <!-- Campos Condicionales Casa -->
+                            <div id="casaFields" class="conditional-fields" style="display: none;">
+                                <div class="form-group">
+                                    <label for="piso" class="form-label">Piso</label>
+                                    <select id="piso" name="piso" class="form-select">
+                                        <option value="">Seleccione piso</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Campos Condicionales Conjunto -->
+                            <div id="conjuntoFields" class="conditional-fields" style="display: none;">
+                                <div class="form-group">
+                                    <label for="nombreConjunto" class="form-label">Nombre del Conjunto</label>
+                                    <input type="text" id="nombreConjunto" name="nombreConjunto" class="form-control" placeholder="Nombre del conjunto residencial">
+                                </div>
+                                <div class="form-group">
+                                    <label for="torreBloque" class="form-label">Torre o Bloque</label>
+                                    <input type="text" id="torreBloque" name="torreBloque" class="form-control" placeholder="Torre o bloque">
+                                </div>
+                                <div class="form-group">
+                                    <label for="aptoCasa" class="form-label">Apto o # Casa</label>
+                                    <input type="text" id="aptoCasa" name="aptoCasa" class="form-control" placeholder="Número de apartamento o casa">
+                                </div>
+                            </div>
+
+                            <!-- Departamento -->
+                            <div class="form-group">
+                                <label for="departamento" class="form-label">Departamento *</label>
+                                <select id="departamento" name="departamento" class="form-select" required>
+                                    <option value="">Seleccione departamento</option>
+                                </select>
+                                <div class="invalid-feedback"></div>
+                            </div>
+
+                            <!-- Municipio -->
+                            <div class="form-group">
+                                <label for="municipio" class="form-label">Municipio *</label>
+                                <select id="municipio" name="municipio" class="form-select" required>
+                                    <option value="">Seleccione primero el departamento</option>
+                                </select>
+                                <div class="invalid-feedback"></div>
+                            </div>
+
+                            <!-- Barrio -->
+                            <div class="form-group">
+                                <label for="barrio" class="form-label">Barrio *</label>
+                                <input type="text" id="barrio" name="barrio" class="form-control" required placeholder="Ingrese el nombre del barrio">
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+
+                        <!-- Botones del Formulario -->
+                        <div class="form-actions">
+                            <button type="submit" id="btnEnviar" class="btn btn-primary">
+                                <span class="btn-text">Validar Datos</span>
+                            </button>
+                            <button type="button" id="btnCancelar" class="btn btn-secondary">
+                                <span class="btn-text">Cancelar</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Summary Modal -->
+    <div class="modal fade" id="summaryModal" tabindex="-1" aria-labelledby="summaryModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content summary-modal">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="summaryModalLabel">Resumen de Validación</h5>
+                </div>
+                <div class="modal-body">
+                    <div id="summaryContent"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnConfirmar" class="btn btn-success">
+                        <span class="btn-text">Confirmar</span>
+                    </button>
+                    <button type="button" id="btnCorregir" class="btn btn-warning">
+                        <span class="btn-text">Corregir</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JavaScript personalizado -->
+    <script src="script-validacion.js"></script>
+</body>
+</html>
