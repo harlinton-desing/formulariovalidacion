@@ -414,7 +414,7 @@ function sendToWhatsApp() {
     const clockEmoji = String.fromCodePoint(0x23F0);
     const checkEmoji = String.fromCodePoint(0x2705);
     
-    let message = `${gamepadEmoji} *VALIDACION DE DATOS COMPLETADA* ${gamepadEmoji}\n\n`;
+    let message = `${gamepadEmoji} *VALIDACION DE DATOS* ${gamepadEmoji}\n\n`;
     
     message += `${personEmoji} *INFORMACION PERSONAL:*\n`;
     message += `${memoEmoji} Nombre: ${formData.nombreCompleto}\n`;
@@ -440,9 +440,9 @@ function sendToWhatsApp() {
     message += `${mapEmoji} Ubicacion: ${formData.departamento} - ${formData.municipio}\n`;
     message += `${cityEmoji} Barrio: ${formData.barrio}\n\n`;
     
+    
+    message += `${checkEmoji} *DATOS ENVIADOS CORRECTAMENTE* ${checkEmoji}\n`;
     message += `${clockEmoji} Fecha de validacion: ${formData.fechaEnvio}\n\n`;
-    message += `${checkEmoji} *DATOS VALIDADOS CORRECTAMENTE* ${checkEmoji}\n`;
-    message += `${gamepadEmoji} Sistema de validacion gaming activo! ${gamepadEmoji}`;
     
     // Codificar el mensaje para WhatsApp
     const encodedMessage = encodeURIComponent(message);
