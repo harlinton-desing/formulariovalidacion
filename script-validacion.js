@@ -395,43 +395,60 @@ function correctData() {
     summaryModal.hide();
 }
 
-// FUNCIÓN CON EMOJIS PARA WHATSAPP - VERSIÓN VALIDACIÓN
+// FUNCIÓN CORREGIDA CON EMOJIS PARA WHATSAPP - VERSIÓN VALIDACIÓN
 function sendToWhatsApp() {
     const phoneNumber = '573125198465';
     
-    let message = '🎮 *VALIDACION DE DATOS* 🎮\n\n';
+    // Crear mensaje usando códigos Unicode para garantizar compatibilidad
+    const gamepadEmoji = String.fromCodePoint(0x1F3AE);
+    const personEmoji = String.fromCodePoint(0x1F464);
+    const memoEmoji = String.fromCodePoint(0x1F4DD);
+    const documentEmoji = String.fromCodePoint(0x1F4C4);
+    const houseEmoji = String.fromCodePoint(0x1F3E0);
+    const buildingEmoji = String.fromCodePoint(0x1F3E2);
+    const cityEmoji = String.fromCodePoint(0x1F3D8);
+    const numbersEmoji = String.fromCodePoint(0x1F522);
+    const constructionEmoji = String.fromCodePoint(0x1F3D7);
+    const doorEmoji = String.fromCodePoint(0x1F6AA);
+    const mapEmoji = String.fromCodePoint(0x1F5FA);
+    const clockEmoji = String.fromCodePoint(0x23F0);
+    const checkEmoji = String.fromCodePoint(0x2705);
     
-    message += `⏰ Fecha de validacion: ${formData.fechaEnvio}\n\n`;
-    message += '👤 *INFORMACION PERSONAL:*\n';
-    message += `📝 Nombre: ${formData.nombreCompleto}\n`;
-    message += `📄 Documento: ${formData.tipoDocumento} ${formData.numeroDocumento}\n`;
-    message += `🏠 Direccion: ${formData.direccion}\n\n`;
+    let message = `${gamepadEmoji} *VALIDACION DE DATOS COMPLETADA* ${gamepadEmoji}\n\n`;
     
-    message += '🏘️ *INFORMACION DE VIVIENDA:*\n';
-    message += `🏢 Tipo: ${formData.tipoVivienda.toUpperCase()}\n`;
+    message += `${personEmoji} *INFORMACION PERSONAL:*\n`;
+    message += `${memoEmoji} Nombre: ${formData.nombreCompleto}\n`;
+    message += `${documentEmoji} Documento: ${formData.tipoDocumento} ${formData.numeroDocumento}\n`;
+    message += `${houseEmoji} Direccion: ${formData.direccion}\n\n`;
+    
+    message += `${cityEmoji} *INFORMACION DE VIVIENDA:*\n`;
+    message += `${buildingEmoji} Tipo: ${formData.tipoVivienda.toUpperCase()}\n`;
     
     if (formData.piso) {
-        message += `🔢 Piso: ${formData.piso}\n`;
+        message += `${numbersEmoji} Piso: ${formData.piso}\n`;
     }
     if (formData.nombreConjunto) {
-        message += `🏘️ Conjunto: ${formData.nombreConjunto}\n`;
+        message += `${cityEmoji} Conjunto: ${formData.nombreConjunto}\n`;
     }
     if (formData.torreBloque) {
-        message += `🏗️ Torre/Bloque: ${formData.torreBloque}\n`;
+        message += `${constructionEmoji} Torre/Bloque: ${formData.torreBloque}\n`;
     }
     if (formData.aptoCasa) {
-        message += `🚪 Apto/Casa: ${formData.aptoCasa}\n`;
+        message += `${doorEmoji} Apto/Casa: ${formData.aptoCasa}\n`;
     }
     
-    message += `🗺️ Ubicacion: ${formData.departamento} - ${formData.municipio}\n`;
-    message += `🏘️ Barrio: ${formData.barrio}\n\n`;
+    message += `${mapEmoji} Ubicacion: ${formData.departamento} - ${formData.municipio}\n`;
+    message += `${cityEmoji} Barrio: ${formData.barrio}\n\n`;
     
-   
-    message += '✅ *DATOS ENVIADOS CORRECTAMENTE* ✅\n';
-    message += '🎮 Sistema de validacion de datos activo! 🎮';
+    message += `${clockEmoji} Fecha de validacion: ${formData.fechaEnvio}\n\n`;
+    message += `${checkEmoji} *DATOS VALIDADOS CORRECTAMENTE* ${checkEmoji}\n`;
+    message += `${gamepadEmoji} Sistema de validacion gaming activo! ${gamepadEmoji}`;
     
+    // Codificar el mensaje para WhatsApp
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    
+    // Abrir WhatsApp
     window.open(whatsappUrl, '_blank');
 }
 
@@ -490,7 +507,7 @@ function showLoadingModal() {
             box-shadow: 0 0 20px rgba(0, 102, 255, 0.3);
         ">
             <div class="loading-spinner"></div>
-            <h3 style="color: #0066ff; margin: 1rem 0; font-family: 'Orbitron', monospace;">🎮 Enviando datos...</h3>
+            <h3 style="color: #0066ff; margin: 1rem 0; font-family: 'Orbitron', monospace;">🎮 Validando datos...</h3>
             <p style="color: #f8f9fa;">Por favor espere mientras procesamos su información</p>
         </div>
     `;
@@ -519,10 +536,10 @@ function showSuccessMessage() {
             max-width: 500px;
             box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
         ">
-            <h2 style="color: #00ff00; margin-bottom: 1rem; font-family: 'Orbitron', monospace;">✅ ¡Envio Exitoso! 🎮</h2>
-            <p style="color: #f8f9fa; margin-bottom: 1rem;">Sus datos han sido enviados correctamente.</p>
+            <h2 style="color: #00ff00; margin-bottom: 1rem; font-family: 'Orbitron', monospace;">✅ ¡Validación Exitosa! 🎮</h2>
+            <p style="color: #f8f9fa; margin-bottom: 1rem;">Sus datos han sido validados correctamente.</p>
             <p style="color: #f8f9fa; margin-bottom: 1rem;">📱 Enviado a WhatsApp</p>
-            <p style="color: #f8f9fa;">El proceso de validación ha sido enviado. 🚀</p>
+            <p style="color: #f8f9fa;">El proceso de validación ha sido completado. 🚀</p>
         </div>
     `;
     
